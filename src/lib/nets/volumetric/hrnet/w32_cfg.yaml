@@ -1,0 +1,79 @@
+# Configuration for HRNetv2_seg_W32
+
+INIT_WEIGHTS: True
+NAME: pose_higher_hrnet
+NUM_JOINTS: 1
+TAG_PER_JOINT: True
+
+PRETRAINED: "/afs/crc.nd.edu/user/y/yzhang46/_DLResources/Models/hrnet_w32-36af842e.pth"
+
+EXTRA:
+  PRETRAINED_LAYERS: ['*']
+  STEM_INPLANES: 64
+  FINAL_CONV_KERNEL: 1
+  WITH_HEAD: True
+
+  STAGE1:
+    NUM_MODULES: 1
+    NUM_BRANCHES: 1
+    BLOCK: BASIC
+    NUM_BLOCKS:
+    - 4
+    NUM_CHANNELS:
+    - 32
+    FUSE_METHOD: SUM
+
+  STAGE2:
+    NUM_MODULES: 1
+    NUM_BRANCHES: 2
+    BLOCK: BASIC
+    NUM_BLOCKS:
+    - 4
+    - 4
+    NUM_CHANNELS:
+    - 32
+    - 64
+    FUSE_METHOD: SUM
+
+  STAGE3:
+    NUM_MODULES: 4
+    NUM_BRANCHES: 3
+    BLOCK: BASIC
+    NUM_BLOCKS:
+    - 4
+    - 4
+    - 4
+    NUM_CHANNELS:
+    - 32
+    - 64
+    - 128
+    FUSE_METHOD: SUM
+
+  STAGE4:
+    NUM_MODULES: 3
+    NUM_BRANCHES: 4
+    BLOCK: BASIC
+    NUM_BLOCKS:
+    - 4
+    - 4
+    - 4
+    - 4
+    NUM_CHANNELS:
+    - 32
+    - 64
+    - 128
+    - 256
+    FUSE_METHOD: SUM
+  
+  DECONV:
+    NUM_DECONVS: 1
+    NUM_CHANNELS:
+    - 32
+    KERNEL_SIZE:
+    - 4
+    NUM_BASIC_BLOCKS: 4
+    CAT_OUTPUT:
+    - True
+  FINAL_CONV_KERNEL: 1
+  FINAL_HEATMAP_CHANNELS: 30 
+  FINAL_OFFSET_CHANNELS: 18
