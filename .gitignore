@@ -1,0 +1,37 @@
+
+# Python
+env/
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+*.pyc
+*.pyd
+*.pyi
+
+# Model Files
+*.pth
+*.pt
+*.model
+
+# IDE Code files
+.idea/
+.vscode
+.vs
+
+# OSX or Linux Crumbs
+.DS_Store
+.swp
+
+# Images, Data Samples
+tests/
+samples/
+*.nii.gz
+
+# Misc - Project Specific
+archive/
+analysis/
+/datasets/
+wandb/
+wandb_login.sh
+*.log
+*.o*
